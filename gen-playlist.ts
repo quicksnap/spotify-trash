@@ -1,17 +1,16 @@
-import fs from "fs";
-import { artists } from "./artists";
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-
+import fs from "fs";
 import _ from "lodash";
-import { readFileSync } from "node:fs";
 
 function sleep(seconds: number) {
   return new Promise((resolve) => setTimeout(resolve, seconds * 1_000));
 }
 
-const PLAYLIST_ID = "XXXXX";
-
-const TOKEN = `XXXXXXXXXXXXXX`;
+const PLAYLIST_ID = process.env.PLAYLIST_ID as string;
+const TOKEN = process.env.SPOTIFY as string;
+if (!PLAYLIST_ID || !TOKEN) {
+  throw new Error("Gimmie the juice");
+}
 
 const addToPlaylistOpts = (
   playlistId: string,

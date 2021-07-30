@@ -1,8 +1,5 @@
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import fs from "fs";
-import { artists } from "./artists";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { ids } from "./fun/valid_ids";
-import _ from "lodash";
 
 type Pagination<T> = {
   href: string;
@@ -19,8 +16,10 @@ function sleep(seconds: number) {
 }
 
 const PAGE_LIMIT = 50;
-const TOKEN = `XXXX`;
-
+const TOKEN = process.env.SPOTIFY;
+if (!TOKEN) {
+  throw new Error("Gimmie the juice");
+}
 const likedAlbumsOpts = (offset: number): AxiosRequestConfig => ({
   method: "get",
   baseURL: "https://api.spotify.com/v1/me/albums",

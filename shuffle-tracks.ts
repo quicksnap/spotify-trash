@@ -1,7 +1,4 @@
 import fs from "fs";
-import { artists } from "./artists";
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-import { ids } from "./fun/valid_ids";
 import _ from "lodash";
 
 const albums: any[] = JSON.parse(
